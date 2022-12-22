@@ -2,20 +2,20 @@ package ru.netology.stats;
 
 public class StatsService {
 
-    public int sumOfAllSales(int[] sales) {
-        int sumSales = 0;
-        for (int s : sales) {
-            sumSales = sumSales + s;
+    public long sumOfAllSales(long[] sales) {
+        long sumSales = 0;
+        for (long sale : sales) {
+            sumSales = sumSales + sale;
         }
         return sumSales;
     }
 
-    public int averageSalesAmount(int[] sales) {
-        int averageAmount = sumOfAllSales(sales) / sales.length;
+    public long averageSalesAmount(long[] sales) {
+        long averageAmount = sumOfAllSales(sales) / sales.length;
         return averageAmount;
     }
 
-    public int monthOfMaxSales(int[] sales) {
+    public int monthOfMaxSales(long[] sales) {
         int maxMonth = 0;
         for (int i = 0; i < sales.length; i++) {
             if (sales[i] >= sales[maxMonth]) {
@@ -25,7 +25,7 @@ public class StatsService {
         return maxMonth + 1;
     }
 
-    public int monthOfMinSales(int[] sales) {
+    public int monthOfMinSales(long[] sales) {
         int minMonth = 0;
         for (int i = 0; i < sales.length; i++) {
             if (sales[i] <= sales[minMonth]) {
@@ -35,20 +35,22 @@ public class StatsService {
         return minMonth + 1;
     }
 
-    public int numberOfMonthsOfLowSales(int[] sales) {
+    public int monthsOfLowSales(long[] sales) {
         int monthsLowSales = 0;
-        for (int sale : sales) {
-            if (sale < averageSalesAmount(sales)) {       // только месяцы с продажами ниже срежнего
+        long averageAmount = averageSalesAmount(sales);
+        for (long sale : sales) {
+            if (sale < averageAmount) {
                 monthsLowSales++;
             }
         }
         return monthsLowSales;
     }
 
-    public int numberOfMonthsOfHighSales(int[] sales) {
+    public int monthsOfHighSales(long[] sales) {
         int monthsHighSales = 0;
-        for (int sale : sales) {
-            if (sale <= averageSalesAmount(sales)) {       // месяцы с продажами равными и выше срежнего (чтобы они тоже входили в статистику)
+        long averageAmount = averageSalesAmount(sales);
+        for (long sale : sales) {
+            if (sale < averageAmount) {
                 monthsHighSales++;
             }
         }
